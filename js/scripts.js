@@ -6,34 +6,52 @@ let favoriteFood = "Gyoza";
 document.write(favoriteFood);
 */
 
-pokemonList = [];
+let pokemonList = [
+    {
+        name: 'Bulbasaur',
+        height: 0.7,
+        weight: 6.9,
+        abilities: ['chlorophyll', 'overgrow'],
+        eggGroups: ['monster', 'grass']
+    },
+    {
+        name: 'Squirtle',
+        height: 0.5,
+        weight: 9,
+        abilities: ['rain-dish', 'torrent'],
+        eggGroups: ['monster', 'water 1']
+    },
+    {
+        name: 'Persian',
+        height: 1,
+        weight: 32,
+        abilities: ['limber', 'technician', 'unnerve'],
+        eggGroups: ['field']
+    }
+];
 
-let testPokemon1 = {
-    name: 'Bulbasaur',
-    height: 0.7,
-    weight: 6.9,
-    abilities: ['chlorophyll', 'overgrow'],
-    eggGroups: ['monster', 'grass']
+for (let i = 0; i < pokemonList.length; i++) {
+    document.write("name: " + pokemonList[i].name);
+    document.write("<br>");
+    document.write("height: " + pokemonList[i].height)
+    if(pokemonList[i].height > 0.5) {
+        document.write(", wow, you're a tall one!");
+    } else {
+        document.write(", short and cute!")
+    }
+    document.write("<br>");
+    document.write("weight: " + pokemonList[i].weight);
+    if(pokemonList[i].weight > 15) {
+        document.write(", super strong!")
+    } else {
+        document.write(", hi little one!")
+    }
+    document.write("<br>");
+    document.write("abilities: " + pokemonList[i].abilities);
+    document.write("<br>");
+    document.write("egg groups: " + pokemonList[i].eggGroups);
+    document.write("<br>");
+    document.write("<br>");
 }
 
-let testPokemon2 = {
-    name: 'Squirtle',
-    height: 0.5,
-    weight: 9,
-    abilities: ['rain-dish', 'torrent'],
-    eggGroups: ['monster', 'water 1']
-}
 
-let testPokemon3 = {
-    name: 'Persian',
-    height: 1,
-    weight: 32,
-    abilities: ['limber', 'technician', 'unnerve'],
-    eggGroups: ['field']
-}
-
-pokemonList = [testPokemon1, testPokemon2, testPokemon3];
-
-document.write(testPokemon1.name)
-document.write("<br>")
-document.write(pokemonList[0].name)
