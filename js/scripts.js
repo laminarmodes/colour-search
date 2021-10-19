@@ -30,28 +30,53 @@ let pokemonList = [
     }
 ];
 
-for (let i = 0; i < pokemonList.length; i++) {
-    document.write("name: " + pokemonList[i].name);
+// for (let i = 0; i < pokemonList.length; i++) {
+//     document.write("name: " + pokemonList[i].name);
+//     document.write("<br>");
+//     document.write("height: " + pokemonList[i].height)
+//     if(pokemonList[i].height > 0.5) {
+//         document.write(", wow, you're a tall one!");
+//     } else {
+//         document.write(", short and cute!")
+//     }
+//     document.write("<br>");
+//     document.write("weight: " + pokemonList[i].weight);
+//     if(pokemonList[i].weight > 15) {
+//         document.write(", super strong!")
+//     } else {
+//         document.write(", hi little one!")
+//     }
+//     document.write("<br>");
+//     document.write("abilities: " + pokemonList[i].abilities);
+//     document.write("<br>");
+//     document.write("egg groups: " + pokemonList[i].eggGroups);
+//     document.write("<br>");
+//     document.write("<br>");
+// }
+
+function loopPokemon(pokemon) {
+    document.write("name: " + pokemon.name);
     document.write("<br>");
-    document.write("height: " + pokemonList[i].height)
-    if(pokemonList[i].height > 0.5) {
+    document.write("height: " + pokemon.height)
+    if(pokemon.height > 0.5) {
         document.write(", wow, you're a tall one!");
     } else {
         document.write(", short and cute!")
     }
     document.write("<br>");
-    document.write("weight: " + pokemonList[i].weight);
-    if(pokemonList[i].weight > 15) {
+    document.write("weight: " + pokemon.weight);
+    if(pokemon.weight > 15) {
         document.write(", super strong!")
     } else {
         document.write(", hi little one!")
     }
     document.write("<br>");
-    document.write("abilities: " + pokemonList[i].abilities);
+    document.write("abilities: " + pokemon.abilities);
     document.write("<br>");
-    document.write("egg groups: " + pokemonList[i].eggGroups);
+    document.write("egg groups: " + pokemon.eggGroups);
     document.write("<br>");
     document.write("<br>");
 }
 
+pokemonList.forEach(loopPokemon);
 
