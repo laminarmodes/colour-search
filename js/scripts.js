@@ -90,7 +90,7 @@ document.write(favoriteFood);
 let pokemonRepository = ( function () {
 
     // Here we wrap pokemonList array in an IIFE to avoid accidently accessing the global state
-    let pokemonList = [
+    let pokemonData = [
         {
             name: 'Bulbasaur',
             height: 0.7,
@@ -116,45 +116,73 @@ let pokemonRepository = ( function () {
 
     // function that returns all items
     function getAll() {
-        return pokemonList;
+        return pokemonData;
     }
 
     // add single item to pokemon list
     function add(pokemon) {
-        pokemonList.push(pokemon);
+        pokemonData.push(pokemon);
+    }
+
+    // add single item as a button and set name of button
+    function addListItem(pokemon) {
+        let listItem = document.createElement('li');
+        let button = document.createElement('button');
+        button.classList.add('custom-button');
+        button.innerText = pokemon.name;
+        button.addEventListener('click', function (event) {
+            showDetails(pokemon);
+        });
+        listItem.append(button);
+        pokeList.append(listItem);
+    }
+
+    // for later
+    function showDetails(pokemon) {
+        console.log(pokemon.name);
     }
 
     // return key / value pairs, returning and object wtih the same names for keys and values
+    // this makes them available outside the IIFE
     return {
         getAll: getAll,
-        add: add
+        add: add,
+        addListItem: addListItem
     };
 
 })();
 
-function loopPokemon(pokemon) {
-    document.write("name: " + pokemon.name);
-    document.write("<br>");
-    document.write("height: " + pokemon.height)
-    if(pokemon.height > 0.5) {
-        document.write(", wow, you're a tall one!");
-    } else {
-        document.write(", short and cute!")
-    }
-    document.write("<br>");
-    document.write("weight: " + pokemon.weight);
-    if(pokemon.weight > 15) {
-        document.write(", super strong!")
-    } else {
-        document.write(", hi little one!")
-    }
-    document.write("<br>");
-    document.write("abilities: " + pokemon.abilities);
-    document.write("<br>");
-    document.write("egg groups: " + pokemon.eggGroups);
-    document.write("<br>");
-    document.write("<br>");
-}
+// function loopPokemon(pokemon) {
+//     document.write("name: " + pokemon.name);
+//     document.write("<br>");
+//     document.write("height: " + pokemon.height)
+//     if(pokemon.height > 0.5) {
+//         document.write(", wow, you're a tall one!");
+//     } else {
+//         document.write(", short and cute!")
+//     }
+//     document.write("<br>");
+//     document.write("weight: " + pokemon.weight);
+//     if(pokemon.weight > 15) {
+//         document.write(", super strong!")
+//     } else {
+//         document.write(", hi little one!")
+//     }
+//     document.write("<br>");
+//     document.write("abilities: " + pokemon.abilities);
+//     document.write("<br>");
+//     document.write("egg groups: " + pokemon.eggGroups);
+//     document.write("<br>");
+//     document.write("<br>");
+// }
 
-pokemonRepository.getAll().forEach(loopPokemon);
+// pokemonRepository.getAll().forEach(loopPokemon);
+
+let pokeList = document.querySelector('.pokemon-list');
+
+
+
+pokemonRepository.getAll().forEach( function (pokemon){
+    pokemonRepository.addListItem(pokemon)
+});
 

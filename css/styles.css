@@ -1,0 +1,17 @@
+.custom-button {
+    
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 32px;
+    padding-right: 32px;
+    text-align: center;
+    display: inline-block;
+    font-family:  'EB Garamond', serif;
+    font-weight: 300;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.pokemon-list {
+    list-style: none;
+}
