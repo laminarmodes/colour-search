@@ -90,29 +90,32 @@ document.write(favoriteFood);
 let pokemonRepository = ( function () {
 
     // Here we wrap pokemonList array in an IIFE to avoid accidently accessing the global state
-    let pokemonData = [
-        {
-            name: 'Bulbasaur',
-            height: 0.7,
-            weight: 6.9,
-            abilities: ['chlorophyll', 'overgrow'],
-            eggGroups: ['monster', 'grass']
-        },
-        {
-            name: 'Squirtle',
-            height: 0.5,
-            weight: 9,
-            abilities: ['rain-dish', 'torrent'],
-            eggGroups: ['monster', 'water 1']
-        },
-        {
-            name: 'Persian',
-            height: 1,
-            weight: 32,
-            abilities: ['limber', 'technician', 'unnerve'],
-            eggGroups: ['field']
-        }
-    ];
+    // let pokemonData = [
+    //     {
+    //         name: 'Bulbasaur',
+    //         height: 0.7,
+    //         weight: 6.9,
+    //         abilities: ['chlorophyll', 'overgrow'],
+    //         eggGroups: ['monster', 'grass']
+    //     },
+    //     {
+    //         name: 'Squirtle',
+    //         height: 0.5,
+    //         weight: 9,
+    //         abilities: ['rain-dish', 'torrent'],
+    //         eggGroups: ['monster', 'water 1']
+    //     },
+    //     {
+    //         name: 'Persian',
+    //         height: 1,
+    //         weight: 32,
+    //         abilities: ['limber', 'technician', 'unnerve'],
+    //         eggGroups: ['field']
+    //     }
+    // ];
+
+    let pokemonData = [];
+    let apiURL = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
     // function that returns all items
     function getAll() {
@@ -124,7 +127,7 @@ let pokemonRepository = ( function () {
         pokemonData.push(pokemon);
     }
 
-    // add single item as a button and set name of button
+    // add single pokemon item as a button and sets name of button to pokemon's name
     function addListItem(pokemon) {
         let listItem = document.createElement('li');
         let button = document.createElement('button');
@@ -137,17 +140,71 @@ let pokemonRepository = ( function () {
         pokeList.append(listItem);
     }
 
-    // for later
-    function showDetails(pokemon) {
-        console.log(pokemon.name);
+    // Fetches the pokemon data and calls 'add' to add it to the pokemonl list
+    function LoadList() {
+        // Try to fetch the json
+        return fetch(apiURL).then(function (response) {
+            // If can fetch the return the jsonresponse
+            return response.json();
+            // If can return the json response then loop through list
+        }).then(function (json) {
+            // For each item in the response
+            json.results.forEach( function (item) {
+                // Assign pokemon to a pokemonObject
+                // Use 'name' and 'detailsUrl' as the keys
+                let pokemon = {
+                    name: item.name,
+                    detailsUrl: item.url
+                };
+                // Add pokemon to list
+                add(pokemon);
+                console.log(pokemon);
+            });
+        }).catch(function (e) {
+            console.error(e);
+        })
     }
+
+    // Expects a pokemon object parameter
+    // Fetches the pokemon data 'details' and places it into "item"
+    function loadDetails(item) {
+        let url = item.detailsUrl;
+        // Try to fetch the URL image
+        return fetch(url).then(function (response) {
+            // If it can fetch the URL then return the response, and try to parse json
+            return response.json();
+            // If can parse json then get the details
+        }).then(function (details) {
+            // Set the image url to the item's image url proerty
+            item.imageUrl = details.sprites.front_default;
+            // Set the height to the item's height property
+            item.height = details.height;
+            // Set the types property to the item's types property
+            item.types = details.types;
+        }).catch( function (e) {
+            console.error(e);
+        })
+    }
+
+    // This calls the function to load the details
+    function showDetails(pokemon) {
+        // Call loadDetails and pass in pokemon object
+        pokemonRepository.loadDetails(pokemon).then(function () {
+            console.log(pokemon);
+        });
+    }
+
+
 
     // return key / value pairs, returning and object wtih the same names for keys and values
     // this makes them available outside the IIFE
     return {
         getAll: getAll,
         add: add,
-        addListItem: addListItem
+        addListItem: addListItem,
+        LoadList: LoadList,
+        loadDetails: loadDetails,
+        showDetails: showDetails
     };
 
 })();
@@ -180,9 +237,10 @@ let pokemonRepository = ( function () {
 
 let pokeList = document.querySelector('.pokemon-list');
 
-
-
-pokemonRepository.getAll().forEach( function (pokemon){
-    pokemonRepository.addListItem(pokemon)
+pokemonRepository.LoadList().then(function () {
+    // Making sure pokemon list is only rendered after loading all the info from the server
+    pokemonRepository.getAll().forEach( function (pokemon){
+        pokemonRepository.addListItem(pokemon)
+    });
 });
 
