@@ -114,6 +114,9 @@ let pokemonRepository = ( function () {
     //     }
     // ];
 
+    // Find the modal container
+    let modalContainer = document.querySelector('#modal-container');
+
     let pokemonData = [];
     let apiURL = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
@@ -132,6 +135,7 @@ let pokemonRepository = ( function () {
         let listItem = document.createElement('li');
         let button = document.createElement('button');
         button.classList.add('custom-button');
+        button.setAttribute('id','show-modal');
         button.innerText = pokemon.name;
         button.addEventListener('click', function (event) {
             showDetails(pokemon);
@@ -186,15 +190,65 @@ let pokemonRepository = ( function () {
         })
     }
 
+    /* Edit the showDetails() method of your current application to show a modal with the 
+    Pokémon’s name, its height, and an image of the Pokémon. You also have the option to 
+    add any additional details you want to display.
+    */
     // This calls the function to load the details
     function showDetails(pokemon) {
         // Call loadDetails and pass in pokemon object
         pokemonRepository.loadDetails(pokemon).then(function () {
             console.log(pokemon);
+            showModal(pokemon.name, pokemon.imageUrl);
         });
     }
 
+    function showModal(name, pokeImageUrl) {
 
+        // Clear all existing content
+        modalContainer.innerHTML = '';
+
+        // Create modal element
+        let modal = document.createElement('div');
+
+        // Set the class name to 'modal'
+        modal.classList.add('modal');
+
+        // Create close button
+        let closeButtonElement = document.createElement('button');
+        // Set close button class
+        closeButtonElement.classList.add('modal-class');
+        // Set close button text
+        closeButtonElement.innerText = 'Close';
+        // Set close button to close modal
+        closeButtonElement.addEventListener('click', hideModal);
+
+        // Create name element
+        let nameElement = document.createElement('h1');
+        // Set name to name passed in
+        nameElement.innerText = name;
+
+        // Create image element
+        let imageElement = document.createElement('img');
+        // Set image source
+        imageElement.src = pokeImageUrl;
+
+        // Add the close button, name and image to the modal
+        modal.appendChild(closeButtonElement);
+        modal.appendChild(nameElement);
+        modal.appendChild(imageElement);
+
+        // Add the modal to the modal container
+        modalContainer.appendChild(modal);
+
+        // Set the class of the modal container ot be is-visible
+        modalContainer.classList.add('is-visible');
+
+    }
+
+    function hideModal() {
+        modalContainer.classList.remove('is-visible');
+    }
 
     // return key / value pairs, returning and object wtih the same names for keys and values
     // this makes them available outside the IIFE
