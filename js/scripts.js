@@ -199,11 +199,11 @@ let pokemonRepository = ( function () {
         // Call loadDetails and pass in pokemon object
         pokemonRepository.loadDetails(pokemon).then(function () {
             console.log(pokemon);
-            showModal(pokemon.name, pokemon.imageUrl);
+            showModal(pokemon.name, pokemon.height, pokemon.imageUrl);
         });
     }
 
-    function showModal(name, pokeImageUrl) {
+    function showModal(name, height, pokeImageUrl) {
 
         // Clear all existing content
         modalContainer.innerHTML = '';
@@ -226,7 +226,12 @@ let pokemonRepository = ( function () {
         // Create name element
         let nameElement = document.createElement('h1');
         // Set name to name passed in
-        nameElement.innerText = name;
+        nameElement.innerText = 'Name: '+name;
+
+        // Create height element
+        let heightElement = document.createElement('h2');
+        // Set height to height passed in
+        heightElement.innerText = 'Height: '+height+' cm';
 
         // Create image element
         let imageElement = document.createElement('img');
@@ -236,6 +241,7 @@ let pokemonRepository = ( function () {
         // Add the close button, name and image to the modal
         modal.appendChild(closeButtonElement);
         modal.appendChild(nameElement);
+        modal.appendChild(heightElement);
         modal.appendChild(imageElement);
 
         // Add the modal to the modal container
@@ -249,6 +255,22 @@ let pokemonRepository = ( function () {
     function hideModal() {
         modalContainer.classList.remove('is-visible');
     }
+
+    // Allow escape key to close modal window
+    window.addEventListener('keydown', (e) => {
+        // If the key pressed is escape and the modal window is open
+        if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+            hideModal();
+        }
+    });
+
+    // Allow clicking outside to close the modal
+    modalContainer.addEventListener('click', (e) => {
+        let target = e.target;
+        if(target === modalContainer) {
+            hideModal();
+        }
+    });
 
     // return key / value pairs, returning and object wtih the same names for keys and values
     // this makes them available outside the IIFE
