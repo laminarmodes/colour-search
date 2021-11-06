@@ -1,3 +1,8 @@
+body {
+    background: rgb(131,58,180);
+background: radial-gradient(circle, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+}
+
 .custom-button {
     padding-top: 16px;
     padding-bottom: 16px;
@@ -10,6 +15,14 @@
     font-size: 20px;
     cursor: pointer;
     text-size-adjust: none;
+
+    /* Glassmorphic */
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 /* @media (min-width: 300px) and (max-width: 500px) {
@@ -47,11 +60,18 @@
     margin: auto;
     display: inline-block;
     box-sizing: border-box;
-    background: #fff;
+    /* background: #fff; */
     padding: 15px;
     width: 100%;
     max-width: 300px;
     text-align: left;
+    /* Glassmorphic */
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 .modal-close {
