@@ -128,9 +128,9 @@ let pokemonRepository = ( function () {
         // closeButtonElement.addEventListener('click', hideModal);
 
         // Create name element
-        let nameElement = document.createElement('h1');
+        //let nameElement = document.createElement('h1');
         // Set name to name passed in
-        nameElement.innerText = 'Name: '+name;
+        //nameElement.innerText = 'Name: '+name;
 
         // Create height element
         let heightElement = document.createElement('h2');
@@ -145,7 +145,9 @@ let pokemonRepository = ( function () {
         // Bootstrap
         // let modalBodyElement = $('.modal-body');
         //modalBodyElement.append(closeButtonElement);
-        modalBodyElement.append(nameElement);
+        $('#pokemonModalLabel').text('Name: '+name);
+
+        //modalBodyElement.append(nameElement);
         modalBodyElement.append(heightElement);
         modalBodyElement.append(imageElement);
 
