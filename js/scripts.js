@@ -20,11 +20,8 @@ let pokemonRepository = ( function () {
     // add single pokemon item as a button and sets name of button to pokemon's name
     function addListItem(pokemon) {
         let listItem = document.createElement('li');
-        // Bootstrap
         listItem.classList.add("group-list-item")
         let button = document.createElement('button');
-        //button.classList.add('custom-button');
-        // Bootstrap
         button.classList.add('btn');
         button.classList.add('btn-primary');
         button.classList.add('btn-glass');
@@ -32,11 +29,9 @@ let pokemonRepository = ( function () {
         $('.btn').attr('data-toggle', 'modal');
         $('.btn').attr('data-target', '#pokemon-modal');
 
-        // button.setAttribute('id','show-modal');
         button.innerText = pokemon.name;
         
         button.addEventListener('click', function (event) {
-            //showDetails(pokemon);
             console.log("button was clicked...");
             showDetails(pokemon);
             
@@ -107,30 +102,8 @@ let pokemonRepository = ( function () {
     function appendDetailsToModal(name, height, pokeImageUrl) {
         console.log("appending details to modal...");
         // Clear all existing content
-        // modalContainer.innerHTML = '';
-        // Bootstrap
         let modalBodyElement = $('.modal-body');
         modalBodyElement.empty();
-
-        // Create modal element
-        // let modal = document.createElement('div');
-
-        // Set the class name to 'modal'
-        // modal.classList.add('modal');
-
-        // Create close button
-        // let closeButtonElement = document.createElement('button');
-        // Set close button class
-        // closeButtonElement.classList.add('modal-class');
-        // Set close button text
-        // closeButtonElement.innerText = 'Close';
-        // Set close button to close modal
-        // closeButtonElement.addEventListener('click', hideModal);
-
-        // Create name element
-        //let nameElement = document.createElement('h1');
-        // Set name to name passed in
-        //nameElement.innerText = 'Name: '+name;
 
         // Create height element
         let heightElement = document.createElement('h2');
@@ -142,22 +115,10 @@ let pokemonRepository = ( function () {
         // Set image source
         imageElement.src = pokeImageUrl;
 
-        // Bootstrap
-        // let modalBodyElement = $('.modal-body');
-        //modalBodyElement.append(closeButtonElement);
         $('#pokemonModalLabel').text('Name: '+name);
-
-        //modalBodyElement.append(nameElement);
         modalBodyElement.append(heightElement);
         modalBodyElement.append(imageElement);
-
-        //$('#pokemon-modal').modal("show");
-
-        // Set the class of the modal container ot be is-visible
-        // modalContainer.classList.add('is-visible');
-
     }
-
 
     // return key / value pairs, returning and object wtih the same names for keys and values
     // this makes them available outside the IIFE
@@ -171,8 +132,6 @@ let pokemonRepository = ( function () {
     };
 
 })();
-
-// pokemonRepository.getAll().forEach(loopPokemon);
 
 let pokeList = document.querySelector('.pokemon-list');
 
