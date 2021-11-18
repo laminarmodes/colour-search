@@ -19,8 +19,13 @@ let pokemonRepository = ( function () {
 
     // add single pokemon item as a button and sets name of button to pokemon's name
     function addListItem(pokemon) {
+
+        let gridItem = document.createElement('div');
+        gridItem.classList.add('col-1');
+
         let listItem = document.createElement('li');
-        listItem.classList.add("group-list-item")
+        listItem.classList.add("group-list-item");
+
         let button = document.createElement('button');
         button.classList.add('btn');
         button.classList.add('btn-primary');
@@ -28,16 +33,20 @@ let pokemonRepository = ( function () {
         $('.btn').attr('type', 'button');
         $('.btn').attr('data-toggle', 'modal');
         $('.btn').attr('data-target', '#pokemon-modal');
-
         button.innerText = pokemon.name;
-        
         button.addEventListener('click', function (event) {
             console.log("button was clicked...");
-            showDetails(pokemon);
-            
+            showDetails(pokemon);   
         });
+
         listItem.append(button);
         pokeList.append(listItem);
+
+        //gridItem.append(button);
+        gridItem.append(button);
+        pokeGrid.append(gridItem);
+
+        
     }
 
     // Fetches the pokemon data and calls 'add' to add it to the pokemonl list
@@ -134,6 +143,7 @@ let pokemonRepository = ( function () {
 })();
 
 let pokeList = document.querySelector('.pokemon-list');
+let pokeGrid = document.querySelector('.pokemon-grid');
 
 pokemonRepository.LoadList().then(function () {
     // Making sure pokemon list is only rendered after loading all the info from the server
