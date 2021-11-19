@@ -21,7 +21,8 @@ let pokemonRepository = ( function () {
     function addListItem(pokemon) {
 
         let gridItem = document.createElement('div');
-        gridItem.classList.add('col-1');
+        gridItem.classList.add('col-2');
+        gridItem.classList.add('p-3');
 
         let listItem = document.createElement('li');
         listItem.classList.add("group-list-item");
