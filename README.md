@@ -6,8 +6,8 @@
 
 ## Run instructions
 
-To run the app locally, download the files and open index.html with Chrome
-To run the live app visit
+- To run the app locally, download the files and open index.html with Chrome
+- To run the live app visit
 
 # Project dependencies (e.g., JavaScript version, ESLint rules)
 
