@@ -1,0 +1,36 @@
+body {
+  background: #833ab4;
+  background: radial-gradient(circle, #833ab4 0, #fd1d1d 50%, #fcb045 100%);
+}
+.btn-glass {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.modal-content {
+  width: 60%;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.modal-title {
+  align-items: center;
+  justify-content: right;
+  justify-items: right;
+}
+.modal-backdrop {
+  background-color: purple;
+}
+.pokemon-list {
+  list-style: none;
+}
+.page-container {
+  margin-top: 60px;
+}

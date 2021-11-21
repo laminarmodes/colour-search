@@ -5,7 +5,7 @@ background: radial-gradient(circle, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%
 
 .btn-glass {
 
-    width: 150;
+    width: 100%;
 
     /* Glassmorphic */ 
     background-color: rgba( 255, 255, 255, 0.25 );
@@ -17,10 +17,11 @@ background: radial-gradient(circle, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%
 }
 
 .modal-content {
-    
+ 
+    width: 60%;
     
  /* Glassmorphic */ 
- background: rgba( 255, 255, 255, 0.6 );
+ background: rgba( 255, 255, 255, 0.7 );
  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
  backdrop-filter: blur( 4px );
  -webkit-backdrop-filter: blur( 4px );
@@ -47,6 +48,10 @@ background: radial-gradient(circle, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%
 .pokemon-list {
     list-style: none;
 } 
+
+.page-container {
+    margin-top: 60px;
+}
 
 
 
