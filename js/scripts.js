@@ -1,5 +1,5 @@
 // Assigning IIFE to pokemonRepository variable, this will hold what the IIFE returns
-let pokemonRepository = (function() {
+let pokemonRepository = (function () {
   // Find the modal container
   //let modalContainer = document.querySelector('#modal-container');
 
@@ -19,10 +19,14 @@ let pokemonRepository = (function() {
   // add single pokemon item as a button and sets name of button to pokemon's name
   function addListItem(pokemon) {
     let gridItem = document.createElement('div');
-    //gridItem.classList.add('col-2');
-    //gridItem.classList.add('col-sm-4');
-    //gridItem.classList.add('col-xs-6');
+    gridItem.classList.add('col-3');
+    gridItem.classList.add('col-xl-2');
+    gridItem.classList.add('col-lg-4');
+    gridItem.classList.add('col-md-6');
+    gridItem.classList.add('col-sm-12');
+    gridItem.classList.add('col-xs-12');
     gridItem.classList.add('p-3');
+
 
     let listItem = document.createElement('li');
     listItem.classList.add('group-list-item');
@@ -35,7 +39,8 @@ let pokemonRepository = (function() {
     $('.btn').attr('data-toggle', 'modal');
     $('.btn').attr('data-target', '#pokemon-modal');
     button.innerText = pokemon.name;
-    button.addEventListener('click', function() {
+    button.innerHTML = '<div><img src="' + pokemon.imageUrl + '"></div><div>' + pokemon.name + '<div>';
+    button.addEventListener('click', function () {
       /* eslint-disable no-console */
       console.log('button was clicked...');
       /* eslint-disable no-console */
@@ -54,28 +59,32 @@ let pokemonRepository = (function() {
   function LoadList() {
     // Try to fetch the json
     return fetch(apiURL)
-      .then(function(response) {
+      .then(function (response) {
         // If can fetch the return the jsonresponse
         return response.json();
         // If can return the json response then loop through list
       })
-      .then(function(json) {
+      .then(function (json) {
         // For each item in the response
-        json.results.forEach(function(item) {
-          // Assign pokemon to a pokemonObject
-          // Use 'name' and 'detailsUrl' as the keys
+        json.results.forEach(function (item) {
+
+
+
+
           let pokemon = {
             name: item.name,
-            detailsUrl: item.url
+            detailsUrl: item.url,
+
           };
-          // Add pokemon to list
+
           add(pokemon);
+
           /* eslint-disable no-console */
           console.log(pokemon);
           /* eslint-disable no-console */
         });
       })
-      .catch(function(e) {
+      .catch(function (e) {
         /* eslint-disable no-console */
         console.error(e);
         /* eslint-disable no-console */
@@ -88,12 +97,12 @@ let pokemonRepository = (function() {
     let url = item.detailsUrl;
     // Try to fetch the URL image
     return fetch(url)
-      .then(function(response) {
+      .then(function (response) {
         // If it can fetch the URL then return the response, and try to parse json
         return response.json();
         // If can parse json then get the details
       })
-      .then(function(details) {
+      .then(function (details) {
         // Set the image url to the item's image url proerty
         item.imageUrl = details.sprites.front_default;
         // Set the height to the item's height property
@@ -101,7 +110,7 @@ let pokemonRepository = (function() {
         // Set the types property to the item's types property
         item.types = details.types;
       })
-      .catch(function(e) {
+      .catch(function (e) {
         /* eslint-disable no-console */
         console.error(e);
         /* eslint-disable no-console */
@@ -115,7 +124,7 @@ let pokemonRepository = (function() {
   // This calls the function to load the details
   function showDetails(pokemon) {
     // Call loadDetails and pass in pokemon object
-    pokemonRepository.loadDetails(pokemon).then(function() {
+    pokemonRepository.loadDetails(pokemon).then(function () {
       /* eslint-disable no-console */
       console.log(pokemon);
       /* eslint-disable no-console */
@@ -159,9 +168,23 @@ let pokemonRepository = (function() {
 let pokeList = document.querySelector('.pokemon-list');
 let pokeGrid = document.querySelector('.pokemon-grid');
 
-pokemonRepository.LoadList().then(function() {
+pokemonRepository.LoadList().then(function () {
   // Making sure pokemon list is only rendered after loading all the info from the server
-  pokemonRepository.getAll().forEach(function(pokemon) {
-    pokemonRepository.addListItem(pokemon);
+  pokemonRepository.getAll().forEach(function (pokemon) {
+
+
+
+    pokemonRepository.loadDetails(pokemon).then(function () {
+      /* eslint-disable no-console */
+      console.log(pokemon);
+      /* eslint-disable no-console */
+
+      pokemonRepository.addListItem(pokemon);
+
+    });
+
+
+
+    // pokemonRepository.addListItem(pokemon);
   });
 });
